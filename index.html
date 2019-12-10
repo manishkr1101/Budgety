@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/materialize/css/materialize.min.css">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/styles.css">
+    
+</head>
+<body class="has-fixed-sidenav">
+    
+    
+
+  <ul id="slide-out" class="sidenav sidenav-fixed">
+      <div>
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="images/back.png">
+                    </div>
+                    <a href="#user"><img class="circle" src="images/profile.jpg"></a>
+                    <a href="#name"><span class="white-text name">Manish Kumar</span></a>
+                    <a href="#email"><span class="white-text email">manishkr@gmail.com</span></a>
+                </div>
+            </li>
+            <li><a class="waves-effect active" href="#" id="incomeBtn">Income</a></li>
+            <li><a class="waves-effect" href="" id="expensesBtn">Expenses</a></li>
+            <li><a class="subheader">Subheader</a></li>
+            <li><a class="waves-effect" href="#!">Logout</a></li>
+            <li><a class="waves-effect" href="#!">About</a></li>
+      </div>
+    
+  </ul>
+
+    <section>
+        <div class="top">
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons menu">menu</i></a>
+
+            <div class="budget">
+                <div class="budget__title">
+                    Available Budget in <span class="budget__title--month">%Month%</span>:
+                </div>
+    
+                <div class="budget__value">+ 2,345.64</div>
+    
+                <div class="budget__income clearfix">
+                    <div class="budget__income--text">Income</div>
+                    <div class="right">
+                        <div class="budget__income--value">+ 4,300.00</div>
+                        <div class="budget__income--percentage">&nbsp;</div>
+                    </div>
+                </div>
+    
+                <div class="budget__expenses clearfix">
+                    <div class="budget__expenses--text">Expenses</div>
+                    <div class="right">
+                        <div class="budget__expenses--value">- 1,954.36</div>
+                        <div class="budget__expenses--percentage">45%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="add">
+                <div class="add__container">
+                    <input type="hidden" value="exp" class="add__type">
+                    <div class="input-field">
+                        <input id="desc" type="text" class="add__description">
+                        <label for="desc">Description</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="value" type="number" class="add__value">
+                        <label for="value">Value</label>
+                    </div>
+                    <button class="add__btn btn waves-effect waves-light">add
+                        <i class="material-icons right">send</i>
+                    </button>
+                    <!-- <button class="add__btn btn waves-effect"><i class="ion-ios-checkmark-outline"></i>Add</button> -->
+                </div>
+            </div>
+
+
+            <div class="container">
+                <div class="income">
+                    <h2 class="icome__title">Income</h2>
+                    
+                    <div class="income__list">
+                       
+                        
+                        <!-- <div class="item clearfix" id="income-0">
+                            <div class="item__description">Salary</div>
+                            <div class="right ">
+                                <div class="item__value">+ 2,100.00</div>
+                                <div class="item__delete">
+                                    <button class="item__delete--btn">
+                                        <i class="ion-ios-close-outline"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="item clearfix" id="income-1">
+                            <div class="item__description">Sold car kjn  hu kh hkh k kn kn kj kjh jkkj njk nkjjh kj jkn knkjn knkj njkn kjn</div>
+                            <div class="right ">
+                                <div class="item__value">+ 1,500.00</div>
+                                <div class="item__delete">
+                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+                                </div>
+                            </div>
+                        </div> -->
+                       
+                        
+                    </div>
+                </div>
+                
+                
+                
+                <div class="expenses">
+                    <h2 class="expenses__title">Expenses</h2>
+                    
+                    <div class="expenses__list">
+                       
+                        
+                        <!-- <div class="item clearfix" id="expense-0">
+                            <div class="item__description">Apartment rent</div>
+                            <div class="right">
+                                <div class="item__value">- 900.00</div>
+                                <div class="item__percentage">21%</div>
+                                <div class="item__delete">
+                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item clearfix" id="expense-1">
+                            <div class="item__description">Grocery shopping</div>
+                            <div class="right">
+                                <div class="item__value">- 435.28</div>
+                                <div class="item__percentage">10%</div>
+                                <div class="item__delete">
+                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+                                </div>
+                            </div>
+                        </div> -->
+                       
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+        
+    <div class="divider"></div>
+
+</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/materialize/js/materialize.min.js"></script>
+    <script src="/js/main.js"></script>
+</html>

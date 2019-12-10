@@ -1,0 +1,23 @@
+{
+  "name": "budgety",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manishkr1101/Budgety.git"
+  },
+  "author": "manish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manishkr1101/Budgety/issues"
+  },
+  "homepage": "https://github.com/manishkr1101/Budgety#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
