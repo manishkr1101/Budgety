@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  overflow: hidden; }
+
+.container {
+  width: 90%;
+  text-align: center; }
+  .container .avatar {
+    width: 40%;
+    margin: auto; }
+    .container .avatar img {
+      width: 100%; }
+
+button[type=submit] {
+  display: block;
+  margin: 20px auto; }
+
+.links {
+  text-align: center; }
+
+.google-btn {
+  margin-top: 8px; }
+  .google-btn button {
+    border-radius: 5px;
+    height: 40px;
+    line-height: 40px;
+    text-transform: capitalize; }
+  .google-btn img {
+    height: 100%;
+    margin-right: 5px;
+    padding: 5px; }
+
+@media only screen and (min-width: 993px) {
+  /* for pc */
+  .container {
+    width: 320px; } }

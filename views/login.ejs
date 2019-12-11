@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+<body>
+
+        <div class="container">
+            <!-- <i class="material-icons avatar light-blue-text text-darken-3">account_circle</i> -->
+            <div class="avatar">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <form action="/login" method="post">
+                
+                <div class="input-field">
+                    <i class="material-icons prefix">email</i>
+                    <input id="email" type="email" class="validate">
+                    <label for="email">Email</label>
+                    <span class="helper-text" data-error="wrong" data-success="right"></span>
+                </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">lock</i>
+                    <input id="password" type="password" class="validate">
+                    <label for="password">Password</label>
+                </div>
+    
+                
+                <button class="btn waves-effect waves-light light-blue darken-4" type="submit" name="action">Login
+                    <i class="material-icons right">send</i>
+                  </button>
+                
+            </form>
+            <div class="links">
+                <span>Don't have an account. <a href="/signup">Signup</a></span>
+            </div>
+            <p>Or</p>
+            <div class="google-btn">
+                <a href="/auth/google">
+                    <button class="btn waves-effect waves-light red darken-4">
+                        signin with google
+                        <img class="left" src="https://img.icons8.com/color/96/000000/google-logo.png">
+                    </button>
+                </a>
+            </div>
+        </div>
+        
+    
+        
+    </body>
+
+<%- include('partials/footer') %>

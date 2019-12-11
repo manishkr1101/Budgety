@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="/materialize/css/materialize.min.css">
-    
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
-    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/css/styles.css">
-    
-</head>
+
+<%- include('partials/header') %>
+
 <body class="has-fixed-sidenav">
     
     
@@ -24,9 +12,9 @@
                     <div class="background">
                         <img src="images/back.png">
                     </div>
-                    <a href="#user"><img class="circle" src="images/profile.jpg"></a>
-                    <a href="#name"><span class="white-text name">Manish Kumar</span></a>
-                    <a href="#email"><span class="white-text email">manishkr@gmail.com</span></a>
+                    <a href="#user"><img class="circle" src="<%= user.imgUrl %>"></a>
+                    <a href="#name"><span class="white-text name"><%= user.name %></span></a>
+                    <a href="#email"><span class="white-text email"><%= user.email %></span></a>
                 </div>
             </li>
             <li><a class="waves-effect active" href="#" id="incomeBtn">Income</a></li>
@@ -157,10 +145,8 @@
         </div>
     </section>
         
-    <div class="divider"></div>
 
 </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="/materialize/js/materialize.min.js"></script>
-    <script src="/js/main.js"></script>
-</html>
+
+<%- include('partials/footer') %>
+<script src="/js/main.js"></script>
