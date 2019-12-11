@@ -23,8 +23,12 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "mongoose": "^5.8.0",
+    "mongoose-findorcreate": "^3.0.0",
     "morgan": "^1.9.1",
-    "node-sass": "^4.13.0"
+    "node-sass": "^4.13.0",
+    "passport": "^0.4.1",
+    "passport-local-mongoose": "^5.0.1"
   }
 }

@@ -9,22 +9,26 @@
             </div>
             
             <form action="/signup" method="post">
-                
+                <div class="input-field">
+                    <i class="material-icons prefix">person</i>
+                    <input id="name" type="text" name="name" required>
+                    <label for="name">Name</label>
+                </div>
                 <div class="input-field">
                     <i class="material-icons prefix">email</i>
-                    <input id="email" type="email" class="validate" required>
+                    <input id="email" type="email" name="username" class="validate" required>
                     <label for="email">Email</label>
                     <span class="helper-text" data-error="Enter valid email" data-success="Correct"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">lock</i>
-                    <input id="password" type="password" class="validate" minlength="6" pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$" required>
+                    <input id="password" type="password" name="password" class="validate" minlength="6" pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$" required>
                     <label for="password">Password</label>
                     <span class="helper-text" data-error="Enter atleast 6 character containing one letter, one scpecial character and one digit" data-success="Fair Password"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">lock</i>
-                    <input id="cnf-password" type="password" class="validate" minlength="6" pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$" required>
+                    <input id="cnf-password" type="password" name="cnf-password" class="validate" minlength="6" pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$" required>
                     <label for="cnf-password">Confirm Password</label>
                     <span id="cnf-pswd-helper" class="helper-text" data-error="Password didn't match" data-success="Matched"></span>
                 </div>

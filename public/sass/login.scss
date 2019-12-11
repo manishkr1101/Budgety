@@ -8,13 +8,13 @@ body{
     display: flex;
     align-content: center;
     align-items: center;
-    overflow: hidden;
-    
+    z-index: -1;
 }
 
 .container{
     width: 90%;
     text-align: center;
+    overflow: hidden;
 
     .avatar{
         // font-size: 10rem;

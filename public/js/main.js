@@ -9,6 +9,7 @@ $('#incomeBtn').click(evt => {
     $(`.container .income`).css('display', 'block');
     $(`.container .expenses`).css('display', 'none');
     $('.add__type').val('inc');
+    $('.sidenav-overlay').click();
 })
 
 $('#expensesBtn').click(evt => {
@@ -17,6 +18,7 @@ $('#expensesBtn').click(evt => {
     $(`.container .income`).css('display', 'none');
     $(`.container .expenses`).css('display', 'block');
     $('.add__type').val('exp');
+    $('.sidenav-overlay').click();
 })
 
 
