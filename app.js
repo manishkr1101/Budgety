@@ -37,16 +37,18 @@ passport.serializeUser(function(user, done) {
   });
 
 
-mongoose.connect(`mongodb+srv://manish:${process.env.MONGO_ATLAS_PASSWORD}@cluster0-rp3y8.mongodb.net/budgetyDB`, {useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true});
+mongoose.connect(`mongodb+srv://manish:${process.env.MONGO_ATLAS_PASSWORD}@cluster0-rp3y8.mongodb.net/budgetyDB`, {useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: true});
 
 
 
 
 const loginRoutes = require('./api/routes/login')
 const signupRoutes = require('./api/routes/signup')
+const dataRoutes = require('./api/routes/data')
 
 app.use('/login', loginRoutes)
 app.use('/signup', signupRoutes)
+app.use('/data', dataRoutes)
 
 const checkAuth = (req, res, next) => {
     if(req.isAuthenticated()){

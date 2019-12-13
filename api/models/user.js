@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     googleId: String,
     imgUrl: {
         type: String,
-        default: 'images/profile.jpg'
+        default: 'images/profile.png'
     }
 })
 

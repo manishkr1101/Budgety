@@ -9,7 +9,10 @@ $('#incomeBtn').click(evt => {
     $(`.container .income`).css('display', 'block');
     $(`.container .expenses`).css('display', 'none');
     $('.add__type').val('inc');
-    $('.sidenav-overlay').click();
+    if($(window).width() < 993){
+        $('.sidenav-overlay').click();
+    }
+    
 })
 
 $('#expensesBtn').click(evt => {
@@ -18,19 +21,22 @@ $('#expensesBtn').click(evt => {
     $(`.container .income`).css('display', 'none');
     $(`.container .expenses`).css('display', 'block');
     $('.add__type').val('exp');
-    $('.sidenav-overlay').click();
+    if($(window).width() < 993){
+        $('.sidenav-overlay').click();
+    }
 })
 
 
 //from lec
 // BUDGET CONTROLLER
+
 var budgetController = (function() {
     
-    var Expense = function(id, description, value) {
+    var Expense = function(id, description, value, percentage = -1) {
         this.id = id;
         this.description = description;
         this.value = value;
-        this.percentage = -1;
+        this.percentage = percentage;
     };
     
     
@@ -183,15 +189,69 @@ var budgetController = (function() {
                 percentage: data.percentage
             };
         },
+        setData: function(newData){
+            data = newData;
+            let incomes = [];
+            data.allItems.inc.forEach((income, index) => {
+                income = new Income(income.id, income.description, income.value);
+                incomes.push(income)
+            })
+            data.allItems.inc = incomes
+
+            data.allItems.exp = data.allItems.exp.map((expense, index) => {
+                expense = new Expense(expense.id, expense.description, expense.value, expense.percentage);
+                return expense
+            })
+        },
         
-        testing: function() {
-            console.log(data);
+        getData: function() {
+            // console.log(data);
+            return data;
         }
     };
     
 })();
 
 
+//DATABASE CONTROLLER
+var dbController = (function(budgetCtrl) {
+    
+    
+    return {
+        loadData: async function(){
+            const time = getTime();
+            const url = `/data/${time.year}/${time.month}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            budgetCtrl.setData(data);
+            // fetch(url)
+            // .then(res => res.json())
+            // .then(doc => {
+            //     budgetCtrl.setData(doc);
+            // })
+            // .catch(err => console.log(err))
+        },
+        uploadData: function(){
+            const time = getTime();
+            fetch('/data', {
+                method: 'post',
+                body: JSON.stringify({
+                    year: time.year,
+                    month: time.month,
+                    data: budgetCtrl.getData()
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+        }
+    }
+
+
+})(budgetController);
 
 
 // UI CONTROLLER
@@ -351,6 +411,17 @@ var UIController = (function() {
             year = now.getFullYear();
             document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year;
         },
+
+        getTime: function(){
+            let now = new Date();
+            let monthIndex = now.getMonth();
+            let year = now.getFullYear();
+
+            return {
+                month: monthIndex,
+                year: year
+            }
+        },
         
         
         changedType: function() {
@@ -367,6 +438,28 @@ var UIController = (function() {
             document.querySelector(DOMstrings.inputBtn).classList.toggle('red');
             
         },
+        init: function(budgetCtrl){
+            var budget = budgetCtrl.getBudget();
+            
+            this.displayBudget(budget);
+
+            // display all items to income and expenses list
+            let incomes = budgetCtrl.getData().allItems.inc;
+            incomes.forEach(income => {
+                
+                this.addListItem(income, 'inc');
+            })
+
+            let expenses = budgetCtrl.getData().allItems.exp;
+            expenses.forEach(exp => {
+                this.addListItem(exp, 'exp');
+            })
+
+            let percentages = budgetCtrl.getPercentages();
+            this.displayPercentages(percentages);
+
+
+        },
         
         
         getDOMstrings: function() {
@@ -380,7 +473,7 @@ var UIController = (function() {
 
 
 // GLOBAL APP CONTROLLER
-var controller = (function(budgetCtrl, UICtrl) {
+var controller = (function(budgetCtrl, UICtrl, dbCtrl) {
     
     var setupEventListeners = function() {
         var DOM = UICtrl.getDOMstrings();
@@ -448,7 +541,7 @@ var controller = (function(budgetCtrl, UICtrl) {
             updatePercentages();
 
             // 7. Update values in database
-            // uploadData();
+            dbCtrl.uploadData();
         }
     };
     
@@ -476,25 +569,51 @@ var controller = (function(budgetCtrl, UICtrl) {
             
             // 4. Calculate and update percentages
             updatePercentages();
+
+            // 5. Update values in database
+            dbCtrl.uploadData();
         }
     };
     
     
     return {
-        init: function() {
-            console.log('Application has started.');
-            UICtrl.displayMonth();
-            UICtrl.displayBudget({
-                budget: 0,
-                totalInc: 0,
-                totalExp: 0,
-                percentage: -1
-            });
-            setupEventListeners();
+        init: async function() {
+            try{
+                console.log('Application has started.');
+                UICtrl.displayMonth();
+                console.log(budgetCtrl.getData())
+                await dbCtrl.loadData();//data is also set in budgetCtrl
+                console.log(budgetCtrl.getData())
+
+                UICtrl.init(budgetCtrl);
+
+                
+                setupEventListeners();
+            }
+            catch(e){
+                console.log(e);
+            }
+
+            
         }
     };
     
-})(budgetController, UIController);
+})(budgetController, UIController, dbController);
 
 
 controller.init();
+
+
+
+
+
+function getTime(){
+    let now = new Date();
+    let monthIndex = now.getMonth();
+    let year = now.getFullYear();
+
+    return {
+        month: monthIndex,
+        year: year
+    }
+}
