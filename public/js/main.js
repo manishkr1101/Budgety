@@ -1,6 +1,22 @@
 
 $(document).ready(function(){
     $('.sidenav').sidenav();
+    $('.modal').modal();
+
+    $('button.modal-trigger').click((evt) => {
+        const el = evt.target;
+        const text = $(el).text();
+        const heading = $('.modal h4');
+        const inputType = $('.modal .add__type');
+        heading.text(`Add ${text}`)
+        if(text == 'Income'){
+            
+            inputType.val('inc')
+        }
+        else if(text == 'Expense'){
+            inputType.val('exp')
+        }
+    })
 });
 
 $('#incomeBtn').click(evt => {
@@ -24,6 +40,12 @@ $('#expensesBtn').click(evt => {
     if($(window).width() < 993){
         $('.sidenav-overlay').click();
     }
+})
+
+$('.btn-floating-add').click(() => {
+    $('.btn-floating-add').toggleClass('clicked')
+    $('section').toggleClass('add-btn-clicked')
+    $('.floating').toggleClass('active')
 })
 
 
@@ -256,12 +278,14 @@ var dbController = (function(budgetCtrl) {
 
 // UI CONTROLLER
 var UIController = (function() {
+
     
     var DOMstrings = {
         inputType: '.add__type',
         inputDescription: '.add__description',
         inputValue: '.add__value',
-        inputBtn: '.add__btn',
+        inputBtn: '.add .add__btn',
+        inputBtnModal: '.modal .add__btn',
         incomeContainer: '.income__list',
         expensesContainer: '.expenses__list',
         budgetLabel: '.budget__value',
@@ -311,10 +335,18 @@ var UIController = (function() {
     
     return {
         getInput: function() {
+            let MOBILE_WIDTH = 993;
+            let prefix;
+            if($(window).width() > MOBILE_WIDTH){
+                prefix = '.add ';
+            }
+            else{
+                prefix = '.modal ';
+            }
             return {
-                type: document.querySelector(DOMstrings.inputType).value, // Will be either inc or exp
-                description: document.querySelector(DOMstrings.inputDescription).value,
-                value: parseFloat(document.querySelector(DOMstrings.inputValue).value)
+                type: document.querySelector(prefix + DOMstrings.inputType).value, // Will be either inc or exp
+                description: document.querySelector(prefix + DOMstrings.inputDescription).value,
+                value: parseFloat(document.querySelector(prefix + DOMstrings.inputValue).value)
             };
         },
         
@@ -480,6 +512,12 @@ var controller = (function(budgetCtrl, UICtrl, dbCtrl) {
         
         document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
 
+        document.querySelector(DOM.inputBtnModal).addEventListener('click', () => {
+            $('.modal-overlay').click();
+            $('.btn-floating-add').click();
+            ctrlAddItem();
+        });
+
         document.addEventListener('keypress', function(event) {
             if (event.keyCode === 13 || event.which === 13) {
                 ctrlAddItem();
@@ -522,7 +560,7 @@ var controller = (function(budgetCtrl, UICtrl, dbCtrl) {
         var input, newItem;
         
         // 1. Get the field input data
-        input = UICtrl.getInput();        
+        input = UICtrl.getInput();   
         
         if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
             // 2. Add the item to the budget controller
@@ -581,9 +619,9 @@ var controller = (function(budgetCtrl, UICtrl, dbCtrl) {
             try{
                 console.log('Application has started.');
                 UICtrl.displayMonth();
-                console.log(budgetCtrl.getData())
+                // console.log(budgetCtrl.getData())
                 await dbCtrl.loadData();//data is also set in budgetCtrl
-                console.log(budgetCtrl.getData())
+                // console.log(budgetCtrl.getData())
 
                 UICtrl.init(budgetCtrl);
 

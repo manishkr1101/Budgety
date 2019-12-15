@@ -25,6 +25,37 @@
       </div>
     
   </ul>
+    <header>
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Income</h4>
+                <div class="add__container row">
+                    <input type="hidden" value="inc" class="add__type">
+                    <div class="col-6">
+                        <div class="input-field">
+                            <input id="desc-modal" type="text" class="add__description">
+                            <label for="desc-modal">Description</label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-field">
+                            <input id="value-modal" type="number" class="add__value">
+                            <label for="value-modal">Value</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-2">
+                        <button class="add__btn btn waves-effect waves-light">add
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    
+                    <!-- <button class="add__btn btn waves-effect"><i class="ion-ios-checkmark-outline"></i>Add</button> -->
+                </div>
+            </div>
+        </div>
+    </header>
 
     <section>
         <div class="top">
@@ -56,19 +87,27 @@
         </div>
         <div class="bottom">
             <div class="add">
-                <div class="add__container">
+                <div class="add__container row">
                     <input type="hidden" value="exp" class="add__type">
-                    <div class="input-field">
-                        <input id="desc" type="text" class="add__description">
-                        <label for="desc">Description</label>
+                    <div class="col-6">
+                        <div class="input-field">
+                            <input id="desc" type="text" class="add__description">
+                            <label for="desc">Description</label>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        <input id="value" type="number" class="add__value">
-                        <label for="value">Value</label>
+                    <div class="col-4">
+                        <div class="input-field">
+                            <input id="value" type="number" class="add__value">
+                            <label for="value">Value</label>
+                        </div>
                     </div>
-                    <button class="add__btn btn waves-effect waves-light">add
-                        <i class="material-icons right">send</i>
-                    </button>
+                    
+                    <div class="col-2">
+                        <button class="add__btn btn waves-effect waves-light">add
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    
                     <!-- <button class="add__btn btn waves-effect"><i class="ion-ios-checkmark-outline"></i>Add</button> -->
                 </div>
             </div>
@@ -144,6 +183,18 @@
 
         </div>
     </section>
+
+    <aside>
+        <div class="floating">
+            <div class="options">
+                <button class="btn waves-effect grey lighten-5 blue-text text-darken-2 modal-trigger" data-target="modal1">Income</button>
+                <button class="btn waves-effect waves-light red darken-4 blue-text text-lighten-5 modal-trigger" data-target="modal1">Expense</button>
+                
+            </div>
+            <a class="btn-floating btn-large waves-effect purple btn-floating-add z-depth-5"><i class="material-icons">add</i></a>
+
+        </div>
+    </aside>
         
 
 </body>

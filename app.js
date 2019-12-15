@@ -6,6 +6,7 @@ const morgan = require('morgan')
 const ejs = require('ejs')
 const mongoose = require('mongoose')
 const passport = require('passport')
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
 const session = require('express-session')
@@ -25,6 +26,24 @@ app.use(passport.initialize())
 app.use(passport.session())
 const User = require('./api/models/user');
 passport.use(User.createStrategy())
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "/auth/google/budgety"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    //   console.log(profile)
+    let object = { 
+        googleId: profile.id, 
+        name: profile.displayName, 
+        imgUrl: profile.photos[0].value, 
+        username: profile.emails[0].value 
+    }
+    User.findOrCreate(object, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
 
 passport.serializeUser(function(user, done) {
     done(null, user.id);
@@ -34,6 +53,16 @@ passport.serializeUser(function(user, done) {
     User.findById(id, function(err, user) {
       done(err, user);
     });
+  });
+
+app.get('/auth/google',
+passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/budgety', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
   });
 
 

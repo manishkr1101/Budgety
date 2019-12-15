@@ -11,7 +11,8 @@
 
 
 section{
-    background-color: lightblue;
+    // background-color: lightblue;
+    // padding-bottom: 70px;
 }
 
 /**********************************************
@@ -35,7 +36,6 @@ body {
     font-family: Open Sans;
     font-size: 16px;
     position: relative;
-    height: 100vh;
     font-weight: 400;
 }
 
@@ -151,6 +151,10 @@ i.menu{
 *** BOTTOM PART
 **********************************************/
 
+.bottom{
+    background-color: white;
+}
+
 /***** FORM *****/
 .add {
     padding: 14px;
@@ -202,9 +206,9 @@ i.menu{
     /* line-height: 1.1; */
     /* margin-left: 10px; */
 }
-.add__btn i{
-    font-size: 35px;
-}
+// .add__btn i{
+//     font-size: 35px;
+// }
 
 .add__btn:active { transform: translateY(2px); }
 
@@ -220,7 +224,8 @@ i.menu{
 /***** LISTS *****/
 .container {
     width: 90%;
-    margin: 60px auto;
+    // margin: inherit auto;
+    overflow: auto;
 }
 
 .income {
@@ -324,5 +329,98 @@ h2 {
     .container{
         width: 60%;
     }
+    .add__container{
+        display: flex;
+        align-items: center;
+    }
+}
+
+/*
+    ASIDE FLOATING BUTTON
+*/
+
+section{
+    opacity: 1;
+    transition: opacity 0.2s, filter 0.2s;
+}
+
+section.add-btn-clicked{
+    opacity: 0.5;
+    // filter: brightness(0.5);
+    pointer-events: none;
     
+}
+
+.floating{
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    
+    // height: 150px;
+    pointer-events: none;
+    // background-color: blue;
+    $h: 50px;
+    .options{
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-end;
+        align-items: stretch;
+        justify-content: space-around;
+        height: 2*$h;
+    }
+    
+}
+.floating.active{
+    pointer-events: all;
+    
+    .options{
+        visibility: visible;
+    }
+}
+
+.floating button{
+    transform: translate(0,30%);
+    opacity: 0;
+    transition: transform 0.2s, opacity 0.2s;
+    transition-timing-function: ease-in-out;
+    // transition-delay: 0.1s;
+
+}
+.floating.active button{
+    transform: translate(0,0);
+    opacity: 1;
+    transition: transform 0.2s, opacity 0.2s;
+}
+ 
+.btn-floating-add{
+    transform: rotate(0);
+    transition: transform 0.2s;
+    pointer-events: all!important;
+    float: right;
+}
+
+.btn-floating-add.clicked{
+    transform: rotate(-45deg);
+}
+
+body{
+    padding-bottom: 70px;
+}
+
+@media only screen and (min-width: 993px){
+    .floating{
+        display: none;
+    }
+}
+
+
+/*
+** HANDLING MODAL AND FORM
+*/
+
+@media only screen and (max-width: 992px){
+    .add{
+        display: none;
+    }
 }
