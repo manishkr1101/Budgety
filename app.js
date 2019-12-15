@@ -112,5 +112,5 @@ app.get('/logout', checkAuth, (req, res) => {
 
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log('server is running at localhost:3000');
+    console.log(`server is running at localhost:${process.env.PORT | 3000}`);
 });
