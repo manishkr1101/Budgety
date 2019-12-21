@@ -16,10 +16,16 @@ app.use(morgan('dev'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'ejs')
+function getTime(mon,day,hr){
+  return (((mon*30)+day)*24+hr) * 3600 * 1000;
+}
 app.use(session({
     secret: 'my name is manish',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+      maxAge: getTime(1,0,0)
+    }
 }))
 
 app.use(passport.initialize())

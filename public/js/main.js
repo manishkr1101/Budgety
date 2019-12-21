@@ -19,6 +19,19 @@ $(document).ready(function(){
     })
 });
 
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/sw.js')
+}
+
+self.addEventListener('beforeinstallprompt', e => {
+    console.log('beforeinstallprompt invoked')
+    e.preventDefault();
+    e.prompt();
+    e.userChoice.then(res => {
+        console.log(res)
+    })
+})
+
 $('#incomeBtn').click(evt => {
     // console.log(evt);
     evt.preventDefault();
